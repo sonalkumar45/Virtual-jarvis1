@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jarvis AI Assistant</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.0.2/dist/tesseract.min.js"></script>
+</head>
+<body>
+  <h1>Jarvis Voice Assistant</h1>
+  <div class="glow"></div>
+
+  <!-- Weather Feature UI -->
+  <div style="display:flex; justify-content:center; align-items:center; margin-bottom:10px;">
+    <select id="weatherInput" style="padding:9px 16px; border-radius:8px; border:1px solid #2196f3; font-size:16px; width:240px;">
+      <option value="">Select city or state</option>
+      <option value="Patna">Patna</option>
+      <option value="Delhi">Delhi</option>  
+      <option value="Mumbai">Mumbai</option>
+      <option value="Kolkata">Kolkata</option>
+      <option value="Chennai">Chennai</option>
+      <option value="Bangalore">Bangalore</option>
+      <option value="Hyderabad">Hyderabad</option>
+      <option value="Ahmedabad">Ahmedabad</option>
+      <option value="Pune">Pune</option>
+      <option value="Jaipur">Jaipur</option>
+      <option value="Lucknow">Lucknow</option>
+      <option value="Patna">Patna</option>
+      <option value="Ranchi">Ranchi</option>
+      <option value="Bhopal">Bhopal</option>
+      <option value="Indore">Indore</option>
+      <option value="Chandigarh">Chandigarh</option>
+      <option value="Goa">Goa</option>
+      <option value="Guwahati">Guwahati</option>
+      <option value="Dehradun">Dehradun</option>
+      <option value="Shimla">Shimla</option>
+      <option value="Srinagar">Srinagar</option>
+      <option value="Agra">Agra</option>
+      <option value="Varanasi">Varanasi</option>
+      <option value="Kanpur">Kanpur</option>
+      <option value="Meerut">Meerut</option>
+      <option value="Jodhpur">Jodhpur</option>
+      <option value="Udaipur">Udaipur</option>
+      <option value="Amritsar">Amritsar</option>
+      <option value="Ludhiana">Ludhiana</option>
+      <option value="Nagpur">Nagpur</option>
+      <option value="Surat">Surat</option>
+      <option value="Vadodara">Vadodara</option>
+      <option value="Raipur">Raipur</option>
+      <option value="Bhubaneswar">Bhubaneswar</option>
+      <option value="Cuttack">Cuttack</option>
+      <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+      <option value="Kochi">Kochi</option>
+      <option value="Madurai">Madurai</option>
+      <option value="Coimbatore">Coimbatore</option>
+      <option value="Tiruchirappalli">Tiruchirappalli</option>
+      <option value="Vijayawada">Vijayawada</option>
+      <option value="Visakhapatnam">Visakhapatnam</option>
+      <option value="Jamshedpur">Jamshedpur</option>
+      <option value="Dhanbad">Dhanbad</option>
+      <option value="Siliguri">Siliguri</option>
+      <option value="Durgapur">Durgapur</option>
+      <option value="Asansol">Asansol</option>
+      <option value="Noida">Noida</option>
+      <option value="Gurgaon">Gurgaon</option>
+      <option value="Faridabad">Faridabad</option>
+      <option value="Ghaziabad">Ghaziabad</option>
+      <option value="Allahabad">Allahabad</option>
+      <option value="Aligarh">Aligarh</option>
+      <option value="Moradabad">Moradabad</option>
+      <option value="Bareilly">Bareilly</option>
+      <option value="Gwalior">Gwalior</option>
+      <option value="Jabalpur">Jabalpur</option>
+      <option value="Aurangabad">Aurangabad</option>
+      <option value="Nashik">Nashik</option>
+      <option value="Kolhapur">Kolhapur</option>
+      <option value="Solapur">Solapur</option>
+      <option value="Panaji">Panaji</option>
+      <option value="Shillong">Shillong</option>
+      <option value="Imphal">Imphal</option>
+      <option value="Aizawl">Aizawl</option>
+      <option value="Itanagar">Itanagar</option>
+      <option value="Gangtok">Gangtok</option>
+      <option value="Kohima">Kohima</option>
+      <option value="Agartala">Agartala</option>
+      <option value="Port Blair">Port Blair</option>
+      <option value="Daman">Daman</option>
+      <option value="Diu">Diu</option>
+      <option value="Kavaratti">Kavaratti</option>
+      <option value="Puducherry">Puducherry</option>
+    </select>
+  </div>
+  <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:18px; margin-bottom:22px; margin-top:18px;">
+    <button id="themeBtn" style="padding:10px 24px; border-radius:30px; background:linear-gradient(90deg,#f0df25,#bdbdbd); color:#222; border:none; font-size:17px; font-weight:600; cursor:pointer; box-shadow:0 2px 8px #3332; transition:0.2s;">🌗 Switch Theme</button>
+    <button id="exportBtn" style="padding:10px 24px; border-radius:30px; background:linear-gradient(90deg,#2df1d0,#bdbdbd); color:#222; border:none; font-size:17px; font-weight:600; cursor:pointer; box-shadow:0 2px 8px #3332; transition:0.2s;">💾 Export Chat</button>
+    <button id="aboutBtn" style="padding:10px 24px; border-radius:30px; background:linear-gradient(90deg,#1976d2,#64b5f6); color:#fff; border:none; font-size:17px; font-weight:600; cursor:pointer; box-shadow:0 2px 8px #1976d280; transition:0.2s;">👤 About Me</button>
+    <button id="googleBtn" style="padding:10px 24px; border-radius:30px; background:linear-gradient(90deg,#4285F4,#34A853); color:#fff; border:none; font-size:17px; font-weight:600; cursor:pointer; box-shadow:0 2px 8px #4285F480; transition:0.2s;">🔎 Google</button>
+    <button id="youtubeBtn" style="padding:10px 24px; border-radius:30px; background:linear-gradient(90deg,#FF0000,#FF9800); color:#fff; border:none; font-size:17px; font-weight:600; cursor:pointer; box-shadow:0 2px 8px #FF000080; transition:0.2s;">▶️ YouTube</button>
+    <button id="whatsappBtn" style="padding:10px 24px; border-radius:30px; background:linear-gradient(90deg,#25D366,#128C7E); color:#fff; border:none; font-size:17px; font-weight:600; cursor:pointer; box-shadow:0 2px 8px #25D36680; transition:0.2s;">💬 WhatsApp</button>
+    <button id="weatherBtn" style="padding:10px 24px; border-radius:30px; background:linear-gradient(90deg,#2196f3,#00bcd4); color:#fff; border:none; font-size:17px; font-weight:600; cursor:pointer; box-shadow:0 2px 8px #2196f380; transition:0.2s;">🌤️ Get Weather</button>
+  </div>
+
+  <div id="output"></div>
+
+  <div id="inputArea">
+    <input type="text" id="textInput" placeholder="Type your question here..." />
+    <button id="sendBtn">Send</button>
+  </div>
+
+  <div id="uploadArea">
+    <label for="fileInput">📎 Upload Image:</label>
+    <input type="file" id="fileInput" accept="image/*,.pdf,.txt">
+  </div>
+
+  <button id="speakBtn" style="display:none;">🎙️ Speak</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
